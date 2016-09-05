@@ -38,6 +38,63 @@
     }
 }
 
+#pragma mark 角标设置(注意： 显示的话，对应位置上的dataSource必须支持显示角标，否则就算设置yes，也不会显示)
+- (void)cornerValue:(int)value atIndex:(NSInteger)index {
+    if (index < _tabBarButtons.count) {
+        CNTabBarButton *tabBarButton = _tabBarButtons[index];
+        CNTabBarButtonDataSourceModel *buttonDataSource = tabBarButton.dataSourceModel;
+        
+        if (!buttonDataSource.isSupportCorner) {
+            return;
+        }
+        
+        if (value < 0) {
+            buttonDataSource.cornerValue =  buttonDataSource.cornerValue + value;
+            
+            if (buttonDataSource.cornerValue < 0) {
+                buttonDataSource.cornerValue = 0;
+            }
+        } else {
+          buttonDataSource.cornerValue = value;
+        }
+        
+        tabBarButton.dataSourceModel = buttonDataSource;
+    }
+}
+
+#pragma mark 角标设置，递增值
+- (void)cornerValueIncreasing:(NSInteger)value atIndex:(NSInteger)index {
+    if (index < _tabBarButtons.count) {
+        CNTabBarButton *tabBarButton = _tabBarButtons[index];
+        CNTabBarButtonDataSourceModel *buttonDataSource = tabBarButton.dataSourceModel;
+        
+        if (!buttonDataSource.isSupportCorner) {
+            return;
+        }
+        
+        if (value < 0) {
+            return;
+        }
+        
+        buttonDataSource.cornerValue = buttonDataSource.cornerValue + value;
+        tabBarButton.dataSourceModel = buttonDataSource;
+    }
+}
+
+#pragma mark 新消息红点(注意： 显示的话，对应位置上的dataSource必须支持显示红点，否则就算设置yes，也不会显示)
+- (void)isNewDotShow:(BOOL)isShow atIndex:(NSInteger)index {
+    if (index < _tabBarButtons.count) {
+        CNTabBarButton *tabBarButton = _tabBarButtons[index];
+        CNTabBarButtonDataSourceModel *buttonDataSource = tabBarButton.dataSourceModel;
+        
+        if (buttonDataSource.isSupportNewsDot) {
+            buttonDataSource.isHaveNewsDot = isShow;
+            
+            tabBarButton.dataSourceModel = buttonDataSource;
+        }
+    }
+}
+
 #pragma mark -- Private Method
 #pragma mark 创建UI
 - (void)setupUI {

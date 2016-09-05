@@ -47,21 +47,14 @@
 
 #pragma mark -- CNTabBarViewControllerDelegate
 - (void)selectedTabBarButton:(CNTabBarButtonDataSourceModel *)dataSourceModel {
-    _dynamicModel.isHaveNewsDot = NO;
-    [_tabBarViewController.tabBar updateDataSource:_dynamicModel atIndex:2];
-    
-    _chatModel.cornerValue--;
-    [_tabBarViewController.tabBar updateDataSource:_chatModel atIndex:1];
+    [_tabBarViewController.tabBar isNewDotShow:NO atIndex:2];
+    [_tabBarViewController.tabBar cornerValue:-1 atIndex:1];
 }
 
 - (void)centerButtonSelected {
-    _chatModel.cornerValue++;
-    [_tabBarViewController.tabBar updateDataSource:_chatModel atIndex:1];
-    
-    _dynamicModel.isHaveNewsDot = YES;
-    [_tabBarViewController.tabBar updateDataSource:_dynamicModel atIndex:2];
+    [_tabBarViewController.tabBar cornerValueIncreasing:1 atIndex:1];
+    [_tabBarViewController.tabBar isNewDotShow:YES atIndex:2];
 }
-
 
 #pragma mark -- Private Method
 - (CNTabBarDataSource *)tabBarDataSource {

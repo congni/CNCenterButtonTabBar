@@ -41,7 +41,7 @@
 // 是否角标数值为0时，是否隐藏
 @property (nonatomic, assign) BOOL isCornerZeroHidden;
 // 设置角标数值
-@property (nonatomic, assign) int cornerValue;
+@property (nonatomic, assign) NSInteger cornerValue;
 
 // 当前是否选中(默认为NO)
 @property (nonatomic, assign) BOOL isSelected;

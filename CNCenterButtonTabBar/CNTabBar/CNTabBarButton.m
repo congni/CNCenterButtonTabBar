@@ -70,7 +70,9 @@
 #pragma mark 更新角标
 - (void)updateCorner {
     if (self.dataSourceModel.isSupportCorner) {
-        _cornerLabel.hidden = self.dataSourceModel.cornerValue <= 0 ? YES : NO;
+        if (self.dataSourceModel.isCornerZeroHidden) {
+            _cornerLabel.hidden = self.dataSourceModel.cornerValue <= 0 ? YES : NO;
+        }
         
         if (!_cornerLabel.hidden) {
             NSString *cornerString = [NSString stringWithFormat:@"%i", self.dataSourceModel.cornerValue];
